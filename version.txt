@@ -1,0 +1,1 @@
+v 1.0.0 => main: Added edit and remove options for links, improved link management, and enabled icon position editing.
