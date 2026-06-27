@@ -1,0 +1,7 @@
+request Copilot 1:
+index.html ni shunday tahrirlansin-ki, Yangi qo'shilgan link osonlikcha remova qilinmasin: 3 nuqtali qismini bosganda "Edit Shortcut" vs "Remove Shortcut" shaklida bo'lsin. html ni standart shaklga keltir.
+request Copilot 2:
+Edit yoki delete qiliganda shahifaga otib yubormasin va delete qilganda ham delete qilish so'ralmasdan o'chirilsin.
+request Copilot 3:
+Endi Sahifadagi iconkalarni positsiyasini edit qilish mumkin bo'lsin.
+github push with commit message: "Added edit and remove options for links, improved link management, and enabled icon position editing."

@@ -1,0 +1,806 @@
+
+<!doctype html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old Links</title>
+    
+    <!-- Asosiy favicon - ICO formati -->
+    <link rel="icon" 
+        type="image/png" 
+        sizes="96x96" 
+        href="https://firebasestorage.googleapis.com/v0/b/storage-test-d4789.firebasestorage.app/o/uploads%2F1782545091848_Link-Cycled.png?alt=media&token=75806aa1-2bb5-452f-bc29-123f2bc21853">
+        
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+
+    :root {
+        --bg: #0f0f0f;
+        --surface: rgba(20, 20, 20, 0.85);
+        --surface2: #242424;
+        --border: #2e2e2e;
+        --text: #e8e8e8;
+        --muted: #888;
+        --accent: #4f8ef7;
+        --accent-hover: #6ba3ff;
+        --danger: #e05555;
+        --radius: 10px;
+        --input-bg: rgba(0, 0, 0, 0.4);
+    }
+
+    .light {
+        --bg: #e8e8e8;
+        --surface: rgba(255, 255, 255, 0.82);
+        --surface2: #f0f0f0;
+        --border: #ccc;
+        --text: #111;
+        --muted: #666;
+        --accent: #2563eb;
+        --accent-hover: #1d4ed8;
+        --danger: #dc2626;
+        --input-bg: rgba(255, 255, 255, 0.7);
+    }
+
+    body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 600px;
+        transition: background .2s, color .2s;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .overlay {
+        min-height: 600px;
+        background: rgba(0, 0, 0, 0);
+        display: flex;
+        flex-direction: column
+    }
+
+    .light .overlay {
+        background: rgba(255, 255, 255, 0)
+    }
+
+    .app {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 2rem 1rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 8px
+    }
+
+    .icon-btn {
+        background: var(--surface);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .15s;
+        font-size: 16px
+    }
+
+    .icon-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent)
+    }
+
+    .hero {
+        text-align: center;
+        padding: 1.5rem 0 .5rem
+    }
+
+    .hero h1 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+        background: linear-gradient(135deg, var(--text) 40%, var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.1
+    }
+
+    .hero p {
+        color: var(--muted);
+        font-size: .85rem;
+        margin-top: .4rem
+    }
+
+    .search-bar {
+        background: var(--surface);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: .6rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: .6rem
+    }
+
+    .search-bar input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text);
+        flex: 1;
+        font-size: .9rem
+    }
+
+    .search-bar input::placeholder {
+        color: var(--muted)
+    }
+
+    .add-btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: .45rem .9rem;
+        cursor: pointer;
+        font-size: .82rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: background .15s;
+        white-space: nowrap
+    }
+
+    .add-btn:hover {
+        background: var(--accent-hover)
+    }
+
+    .settings-panel {
+        background: var(--surface);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        display: none;
+        max-width: 360px;
+        margin: 0 auto;
+        width: 100%
+    }
+
+    .settings-panel.open {
+        display: block
+    }
+
+    .settings-panel h3 {
+        font-size: .75rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: .6px;
+        margin-bottom: .9rem
+    }
+
+    .field {
+        margin-bottom: .7rem
+    }
+
+    .field label {
+        display: block;
+        font-size: .78rem;
+        color: var(--muted);
+        margin-bottom: .3rem
+    }
+
+    .field input {
+        width: 100%;
+        background: var(--input-bg);
+        backdrop-filter: blur(4px);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: .5rem .75rem;
+        color: var(--text);
+        font-size: .82rem;
+        outline: none;
+        font-family: monospace
+    }
+
+    .field input:focus {
+        border-color: var(--accent)
+    }
+
+    .connect-btn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: .55rem 1rem;
+        cursor: pointer;
+        font-size: .82rem;
+        font-weight: 500;
+        width: 100%;
+        margin-top: .25rem
+    }
+
+    .connect-btn:hover {
+        background: var(--accent-hover)
+    }
+
+    .status {
+        font-size: .78rem;
+        margin-top: .5rem;
+        text-align: center;
+        color: var(--muted)
+    }
+
+    .status.ok {
+        color: #4caf50
+    }
+
+    .status.err {
+        color: var(--danger)
+    }
+
+    .settings-divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: .9rem 0
+    }
+
+    .links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: .85rem
+    }
+
+    .link-item {
+        background: var(--surface);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: .9rem .6rem;
+        cursor: pointer;
+        transition: all .15s;
+        text-align: center;
+        position: relative;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .45rem
+    }
+
+    .link-item:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px)
+    }
+
+    .link-item .favicon {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        background: var(--surface2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        overflow: hidden
+        ;
+        cursor: grab;
+    }
+
+    .link-item .favicon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 7px
+    }
+
+    .link-item .link-name {
+        font-size: .74rem;
+        color: var(--text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        font-weight: 500
+    }
+
+    .link-item .del-btn {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: var(--danger);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        width: 17px;
+        height: 17px;
+        font-size: 11px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center
+    }
+
+    .link-item:hover .del-btn {
+        display: flex
+    }
+
+    .link-item .menu-btn {
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .link-item .menu-btn:hover { color: var(--accent); }
+
+    .menu {
+        position: absolute;
+        right: 0;
+        top: 34px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 140px;
+        z-index: 50;
+    }
+    .menu button { background: transparent; border: none; color: var(--text); text-align: left; padding: 6px 8px; cursor: pointer; border-radius: 6px }
+    .menu button:hover { background: rgba(0,0,0,0.06); color: var(--accent) }
+
+    .link-item.dragging { opacity: .5; transform: scale(.98); }
+    .link-item.drag-over { outline: 2px dashed var(--accent); }
+
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, .6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        backdrop-filter: blur(3px)
+    }
+
+    .modal {
+        background: var(--surface);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.4rem;
+        width: 320px;
+        max-width: 90vw
+    }
+
+    .modal h3 {
+        font-size: .95rem;
+        margin-bottom: .9rem;
+        font-weight: 600
+    }
+
+    .modal input {
+        width: 100%;
+        background: var(--input-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: .55rem .8rem;
+        color: var(--text);
+        font-size: .88rem;
+        outline: none;
+        margin-bottom: .65rem
+    }
+
+    .modal input:focus {
+        border-color: var(--accent)
+    }
+
+    .modal input::placeholder {
+        color: var(--muted)
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: .5rem;
+        margin-top: .25rem
+    }
+
+    .modal-actions button {
+        flex: 1;
+        padding: .55rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: .83rem;
+        font-weight: 500;
+        border: 1px solid var(--border)
+    }
+
+    .btn-cancel {
+        background: transparent;
+        color: var(--muted)
+    }
+
+    .btn-save {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent)
+    }
+
+    .btn-save:hover {
+        background: var(--accent-hover)
+    }
+
+    .empty {
+        text-align: center;
+        padding: 2.5rem 1rem;
+        color: var(--muted)
+    }
+
+    .empty .empty-icon {
+        font-size: 2rem;
+        margin-bottom: .6rem;
+        opacity: .4
+    }
+
+    .empty p {
+        font-size: .88rem
+    }
+
+    .section-label {
+        font-size: .78rem;
+        color: var(--muted);
+        font-weight: 500
+    }
+
+</style>
+
+<body>
+<div class="overlay" id="overlayDiv">
+    <div class="app" id="appRoot">
+
+        <header>
+            <div style="font-size:.85rem;font-weight:500;color:var(--muted);letter-spacing:.3px">old links</div>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleSettings()" title="Sozlamalar">⚙️</button>
+                <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">☀️</button>
+            </div>
+        </header>
+
+        <div class="settings-panel" id="settingsPanel">
+            <h3>Firebase</h3>
+            <div class="field"><label>API Key</label><input type="password" id="apiKey" placeholder="AIza..." /></div>
+            <div class="field"><label>Project ID</label><input type="text" id="projectId" placeholder="old-links" />
+            </div>
+            <div class="field"><label>App ID</label><input type="text" id="appId" placeholder="1:xxx:web:xxx" /></div>
+            <button class="connect-btn" onclick="saveFirebaseConfig()">🔌 Ulash</button>
+            <div class="status" id="fbStatus"></div>
+            <hr class="settings-divider">
+            <h3>Ko'rinish</h3>
+            <div class="field"><label>Orqa fon rasmi (URL)</label><input type="url" id="bgUrl" placeholder="https://..."
+                    oninput="applyBg(this.value)" /></div>
+        </div>
+
+        <div class="hero">
+            <h1>Old Links</h1>
+            <p>Eski saytlaringiz bir joyda</p>
+        </div>
+
+        <div class="search-bar">
+            <span style="color:var(--muted);font-size:14px">🔍</span>
+            <input type="text" placeholder="Link qidirish..." id="searchInput" oninput="renderLinks()">
+            <button class="add-btn" onclick="openAddModal()">＋ Qo'shish</button>
+        </div>
+
+        <div class="section-label" id="sectionLabel"></div>
+        <div class="links-grid" id="linksGrid"></div>
+        <div class="empty" id="emptyState" style="display:none">
+            <div class="empty-icon">🔗</div>
+            <p>Hali link yo'q. Birinchi linkni qo'shing!</p>
+        </div>
+    </div>
+</div>
+
+    <div class="modal-overlay" id="modalOverlay" style="display:none" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+        <h3 id="modalTitle">Yangi link qo'shish</h3>
+        <input type="hidden" id="editingId" />
+        <input type="text" id="linkName" placeholder="Nom (masalan: GitHub)" maxlength="30" />
+        <input type="url" id="linkUrl" placeholder="https://..." />
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeModal()">Bekor</button>
+            <button class="btn-save" id="modalSaveBtn" onclick="saveLink()">Saqlash</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let links = []; let fbConfig = {}; let useFirebase = false; let db = null; let isDark = true; let editingId = null;
+    const SK = 'old_links_data', CK = 'old_links_fb_config', BK = 'old_links_bg', TK = 'old_links_theme';
+
+    function init() {
+        const t = localStorage.getItem(TK);
+        if (t === 'light') { isDark = false; document.body.classList.add('light'); document.getElementById('themeBtn').textContent = '🌙'; }
+        const bg = localStorage.getItem(BK);
+        if (bg) { document.getElementById('bgUrl').value = bg; applyBg(bg, false); }
+        const saved = localStorage.getItem(CK);
+        if (saved) { try { fbConfig = JSON.parse(saved); fillConfigInputs(); connectFirebase(true); } catch (e) { } }
+        const local = localStorage.getItem(SK);
+        if (local) { try { links = JSON.parse(local); } catch (e) { links = []; } }
+        // ensure deterministic order: if 'order' field present prefer it, otherwise createdAt
+        if (links && links.length) {
+            links.sort((a,b) => (a.order ?? a.createdAt) - (b.order ?? b.createdAt));
+        }
+        renderLinks();
+    }
+
+    function fillConfigInputs() {
+        if (fbConfig.apiKey) document.getElementById('apiKey').value = fbConfig.apiKey;
+        if (fbConfig.projectId) document.getElementById('projectId').value = fbConfig.projectId;
+        if (fbConfig.appId) document.getElementById('appId').value = fbConfig.appId;
+    }
+
+    function applyBg(url, save = true) {
+        if (url && url.startsWith('http')) {
+            document.body.style.backgroundImage = `url('${url}')`;
+            document.getElementById('overlayDiv').style.background = isDark ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.3)';
+            if (save) localStorage.setItem(BK, url);
+        } else {
+            document.body.style.backgroundImage = 'none';
+            document.getElementById('overlayDiv').style.background = 'none';
+            if (save) localStorage.removeItem(BK);
+        }
+    }
+
+    function saveFirebaseConfig() {
+        fbConfig = {
+            apiKey: document.getElementById('apiKey').value.trim(),
+            projectId: document.getElementById('projectId').value.trim(),
+            appId: document.getElementById('appId').value.trim()
+        };
+        if (!fbConfig.apiKey || !fbConfig.projectId || !fbConfig.appId) { setStatus('Barcha maydonlarni to\'ldiring', 'err'); return; }
+        localStorage.setItem(CK, JSON.stringify(fbConfig));
+        connectFirebase(false);
+    }
+
+    function connectFirebase(silent) {
+        if (!fbConfig.apiKey) return;
+        setStatus('Ulanmoqda...', '');
+        const s1 = document.createElement('script');
+        s1.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js';
+        s1.onload = () => {
+            const s2 = document.createElement('script');
+            s2.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js';
+            s2.onload = () => {
+                try {
+                    if (!firebase.apps.length) { firebase.initializeApp({ apiKey: fbConfig.apiKey, authDomain: fbConfig.projectId + '.firebaseapp.com', projectId: fbConfig.projectId, appId: fbConfig.appId }); }
+                    db = firebase.firestore(); useFirebase = true;
+                    setStatus('✅ Firebase ulandi', 'ok');
+                    loadFromFirebase();
+                } catch (e) { setStatus('❌ Xato: ' + e.message, 'err'); }
+            };
+            document.head.appendChild(s2);
+        };
+        document.head.appendChild(s1);
+    }
+
+    function loadFromFirebase() {
+        if (!db) return;
+        db.collection('links').orderBy('createdAt', 'asc').onSnapshot(snap => {
+            links = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            // sort by explicit order if present
+            links.sort((a,b) => (a.order ?? a.createdAt) - (b.order ?? b.createdAt));
+            renderLinks();
+        }, err => console.log(err));
+    }
+
+    function setStatus(msg, type) { const el = document.getElementById('fbStatus'); el.textContent = msg; el.className = 'status ' + type; }
+
+    function getFavicon(url) { try { return `https://www.google.com/s2/favicons?domain=${new URL(url).origin}&sz=64`; } catch { return null; } }
+    function getDomainLetter(url) { try { return new URL(url).hostname.charAt(0).toUpperCase(); } catch { return '?'; } }
+    function escHtml(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+    function renderLinks() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = q ? links.filter(l => l.name.toLowerCase().includes(q) || (l.url || '').toLowerCase().includes(q)) : links;
+        const grid = document.getElementById('linksGrid');
+        const empty = document.getElementById('emptyState');
+        const label = document.getElementById('sectionLabel');
+        if (filtered.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; label.textContent = ''; }
+        else {
+            empty.style.display = 'none';
+            label.textContent = filtered.length + ' ta link';
+                        grid.innerHTML = filtered.map(l => {
+                const fav = getFavicon(l.url);
+                const letter = getDomainLetter(l.url);
+                const img = fav ? `<img src="${fav}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><span style="display:none;font-size:17px;font-weight:700;color:var(--accent)">${letter}</span>` : `<span style="font-size:17px;font-weight:700;color:var(--accent)">${letter}</span>`;
+                                return `<a class="link-item" data-id="${l.id}" draggable="true" ondragstart="onDragStart(event,'${l.id}')" ondragover="onDragOver(event,'${l.id}')" ondrop="onDrop(event,'${l.id}')" ondragend="onDragEnd()" href="${escHtml(l.url)}" target="_blank" rel="noopener">
+        <div style="position:absolute;top:6px;right:6px">
+          <button class="menu-btn" onclick="event.preventDefault();event.stopPropagation();toggleMenu(event,'${l.id}')">⋯</button>
+                    <div class="menu" id="menu-${l.id}" style="display:none">
+                        <button type="button" onclick="event.preventDefault();event.stopPropagation();openEditModal('${l.id}')">Edit Shortcut</button>
+                        <button type="button" onclick="event.preventDefault();event.stopPropagation();confirmDelete('${l.id}')">Remove Shortcut</button>
+                    </div>
+        </div>
+        <div class="favicon">${img}</div>
+        <span class="link-name" title="${escHtml(l.name)}">${escHtml(l.name)}</span>
+      </a>`;
+            }).join('');
+        }
+    }
+
+    // Menu helpers
+    function toggleMenu(e, id) {
+        closeAllMenus();
+        const el = document.getElementById('menu-' + id);
+        if (el) el.style.display = 'block';
+    }
+    function closeAllMenus() {
+        document.querySelectorAll('.menu').forEach(m => m.style.display = 'none');
+    }
+    document.addEventListener('click', () => closeAllMenus());
+
+    function openEditModal(id) {
+        const item = links.find(i => i.id === id);
+        if (!item) return;
+        editingId = id;
+        document.getElementById('editingId').value = id;
+        document.getElementById('linkName').value = item.name;
+        document.getElementById('linkUrl').value = item.url;
+        document.getElementById('modalTitle').textContent = 'Linkni tahrirlash';
+        document.getElementById('modalSaveBtn').textContent = 'Yangilash';
+        document.getElementById('modalOverlay').style.display = 'flex';
+    }
+
+    function confirmDelete(id) {
+        // Delete immediately without extra confirmation
+        deleteLink(id);
+    }
+
+    // Drag & drop reordering
+    let dragSrcId = null; let isDragging = false;
+    function onDragStart(e, id) {
+        dragSrcId = id; isDragging = true;
+        try { e.dataTransfer.setData('text/plain', id); e.dataTransfer.effectAllowed = 'move'; } catch (err) {}
+        const el = document.querySelector(`[data-id="${id}"]`);
+        setTimeout(() => el && el.classList.add('dragging'), 0);
+    }
+    function onDragOver(e, id) {
+        e.preventDefault();
+        const el = document.querySelector(`[data-id="${id}"]`);
+        if (!el) return;
+        if (dragSrcId !== id) el.classList.add('drag-over');
+    }
+    function onDrop(e, id) {
+        e.preventDefault();
+        const srcId = dragSrcId || e.dataTransfer.getData('text/plain');
+        if (!srcId || srcId === id) { onDragEnd(); return; }
+        const srcIndex = links.findIndex(l => l.id === srcId);
+        const targetIndex = links.findIndex(l => l.id === id);
+        if (srcIndex < 0 || targetIndex < 0) { onDragEnd(); return; }
+        const [item] = links.splice(srcIndex, 1);
+        links.splice(targetIndex, 0, item);
+        saveOrder();
+        renderLinks();
+        onDragEnd();
+    }
+    function onDragEnd() {
+        isDragging = false; dragSrcId = null;
+        document.querySelectorAll('.link-item.dragging').forEach(n => n.classList.remove('dragging'));
+        document.querySelectorAll('.link-item.drag-over').forEach(n => n.classList.remove('drag-over'));
+    }
+
+    // Prevent navigation while dragging
+    document.addEventListener('click', function(e){
+        if (isDragging) e.preventDefault();
+    }, true);
+
+    function saveOrder() {
+        // persist order locally and to firebase if enabled
+        localStorage.setItem(SK, JSON.stringify(links));
+        if (useFirebase && db) {
+            links.forEach((l, idx) => {
+                try { db.collection('links').doc(l.id).update({ order: idx }); } catch (e) {}
+            });
+        }
+    }
+
+    async function saveLink() {
+        const name = document.getElementById('linkName').value.trim();
+        const url = document.getElementById('linkUrl').value.trim();
+        if (!name) { document.getElementById('linkName').focus(); return; }
+        if (!url || !url.startsWith('http')) { document.getElementById('linkUrl').focus(); return; }
+        if (editingId) {
+            if (useFirebase && db) {
+                try { await db.collection('links').doc(editingId).update({ name, url }); } catch (e) { console.log(e); }
+            } else {
+                links = links.map(l => l.id === editingId ? { ...l, name, url } : l);
+                localStorage.setItem(SK, JSON.stringify(links));
+            }
+            editingId = null;
+        } else {
+            if (useFirebase && db) {
+                try { await db.collection('links').add({ name, url, createdAt: firebase.firestore.FieldValue.serverTimestamp() }); } catch (e) { console.log(e); }
+            } else {
+                links.push({ id: Date.now().toString(), name, url, createdAt: Date.now(), order: links.length });
+                localStorage.setItem(SK, JSON.stringify(links));
+            }
+        }
+        closeModal(); renderLinks();
+    }
+
+    function openAddModal() {
+        document.getElementById('linkName').value = '';
+        document.getElementById('linkUrl').value = '';
+        document.getElementById('modalOverlay').style.display = 'flex';
+        setTimeout(() => document.getElementById('linkName').focus(), 50);
+    }
+    function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+
+    async function addLink() {
+        const name = document.getElementById('linkName').value.trim();
+        const url = document.getElementById('linkUrl').value.trim();
+        if (!name) { document.getElementById('linkName').focus(); return; }
+        if (!url || !url.startsWith('http')) { document.getElementById('linkUrl').focus(); return; }
+        if (useFirebase && db) {
+            try { await db.collection('links').add({ name, url, createdAt: firebase.firestore.FieldValue.serverTimestamp() }); } catch (e) { console.log(e); }
+        } else {
+            links.push({ id: Date.now().toString(), name, url, createdAt: Date.now() });
+            localStorage.setItem(SK, JSON.stringify(links)); renderLinks();
+        }
+        closeModal();
+    }
+
+    async function deleteLink(id) {
+        if (useFirebase && db) { try { await db.collection('links').doc(id).delete(); } catch (e) { } }
+        else { links = links.filter(l => l.id !== id); saveOrder(); renderLinks(); }
+    }
+
+    function toggleTheme() {
+        isDark = !isDark;
+        document.body.classList.toggle('light', !isDark);
+        document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem(TK, isDark ? 'dark' : 'light');
+        const bg = localStorage.getItem(BK);
+        if (bg) applyBg(bg, false);
+    }
+
+    function toggleSettings() { document.getElementById('settingsPanel').classList.toggle('open'); }
+
+    document.getElementById('linkUrl').addEventListener('keydown', e => { if (e.key === 'Enter') saveLink(); });
+    document.getElementById('linkName').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('linkUrl').focus(); });
+
+    init();
+</script>
+</body>
+</html>
