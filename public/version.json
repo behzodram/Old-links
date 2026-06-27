@@ -31,13 +31,31 @@
     "commit": "request Copilot 3: Endi Sahifadagi iconkalarni positsiyasini edit qilish mumkin bo'lsin."
   },
   {
-    "id": "final",
+    "id": "v4",
     "date": "2026-06-27T00:20:00Z",
     "author": "user",
     "changes": [
       "Aggregated changes and prepared repository metadata",
       "Added version.json and History view to the UI"
     ],
-    "commit": "Added edit and remove options for links, improved link management, and enabled icon position editing."
+    "commit": "Havolalar uchun tahrirlash va o'chirish imkoniyatlari qo'shildi, havolalarni boshqarish yaxshilandi va iconkalar o'rnini tahrirlash yoqildi."
+  },
+  {
+    "id": "v5",
+    "date": "2026-06-27T00:25:00Z",
+    "author": "user",
+    "changes": [
+      "index.htmlni shunday o'zgartirilsin-ki,  unda sozlamalar orqali iconlarni eniga nechta joylashtirilishi belgilansin va shunga mos icon tartiblansin."
+    ],
+    "commit": "request Copilot 5: index.htmlni shunday o'zgartirilsin-ki,  unda sozlamalar orqali iconlarni eniga nechta joylashtirilishi belgilansin va shunga mos icon tartiblansin."
+  },
+  {
+    "id": "v6",
+    "date": "2026-06-27T00:30:00Z",
+    "author": "user",
+    "changes": [
+      "The width should be between 3 and 12. It is important that the icons do not change their shape when placed horizontally, no matter how much space they take up on the screen."
+    ],
+    "commit": "request Copilot 6: Eniga joylashtirish minimum 3dan maximum 12 gacha bo'lsin. muhimi iconlar eniga joylashtirilganda ham shaklini o'zgartirmasin, Ekrandan har qancha joy olsa ham bo'laveradi."
   }
 ]

@@ -213,7 +213,8 @@
         margin-bottom: .3rem
     }
 
-    .field input {
+    .field input,
+    .field select {
         width: 100%;
         background: var(--input-bg);
         backdrop-filter: blur(4px);
@@ -226,7 +227,13 @@
         font-family: monospace
     }
 
-    .field input:focus {
+    .field select {
+        cursor: pointer;
+        appearance: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
         border-color: var(--accent)
     }
 
@@ -270,8 +277,10 @@
 
     .links-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: .85rem
+        grid-template-columns: repeat(var(--links-cols, 4), minmax(0, auto));
+        justify-content: center;
+        gap: .85rem;
+        align-content: start
     }
 
     .link-item {
@@ -279,6 +288,10 @@
         backdrop-filter: blur(10px);
         border: 1px solid var(--border);
         border-radius: var(--radius);
+        width: 92px;
+        min-width: 92px;
+        height: 104px;
+        min-height: 104px;
         padding: .9rem .6rem;
         cursor: pointer;
         transition: all .15s;
@@ -510,6 +523,21 @@
             <h3>Ko'rinish</h3>
             <div class="field"><label>Orqa fon rasmi (URL)</label><input type="url" id="bgUrl" placeholder="https://..."
                     oninput="applyBg(this.value)" /></div>
+            <div class="field">
+                <label>Har bir qatorda nechta ikon</label>
+                <select id="iconsPerRow" onchange="setIconsPerRow(this.value)">
+                    <option value="3">3 ta</option>
+                    <option value="4">4 ta</option>
+                    <option value="5">5 ta</option>
+                    <option value="6">6 ta</option>
+                    <option value="7">7 ta</option>
+                    <option value="8">8 ta</option>
+                    <option value="9">9 ta</option>
+                    <option value="10">10 ta</option>
+                    <option value="11">11 ta</option>
+                    <option value="12">12 ta</option>
+                </select>
+            </div>
         </div>
 
         <div class="hero">
@@ -557,13 +585,15 @@
 
 <script>
     let links = []; let fbConfig = {}; let useFirebase = false; let db = null; let isDark = true; let editingId = null;
-    const SK = 'old_links_data', CK = 'old_links_fb_config', BK = 'old_links_bg', TK = 'old_links_theme';
+    const SK = 'old_links_data', CK = 'old_links_fb_config', BK = 'old_links_bg', TK = 'old_links_theme', COLS_KEY = 'old_links_cols';
 
     function init() {
         const t = localStorage.getItem(TK);
         if (t === 'light') { isDark = false; document.body.classList.add('light'); document.getElementById('themeBtn').textContent = '🌙'; }
         const bg = localStorage.getItem(BK);
         if (bg) { document.getElementById('bgUrl').value = bg; applyBg(bg, false); }
+        const savedCols = localStorage.getItem(COLS_KEY);
+        applyIconColumns(savedCols || 4, false);
         const saved = localStorage.getItem(CK);
         if (saved) { try { fbConfig = JSON.parse(saved); fillConfigInputs(); connectFirebase(true); } catch (e) { } }
         const local = localStorage.getItem(SK);
@@ -591,6 +621,19 @@
             document.getElementById('overlayDiv').style.background = 'none';
             if (save) localStorage.removeItem(BK);
         }
+    }
+
+    function applyIconColumns(count, save = true) {
+        const parsed = parseInt(count, 10);
+        const value = Math.min(12, Math.max(3, parsed || 4));
+        document.documentElement.style.setProperty('--links-cols', String(value));
+        const select = document.getElementById('iconsPerRow');
+        if (select) select.value = String(value);
+        if (save) localStorage.setItem(COLS_KEY, String(value));
+    }
+
+    function setIconsPerRow(value) {
+        applyIconColumns(value);
     }
 
     function saveFirebaseConfig() {

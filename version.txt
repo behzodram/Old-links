@@ -1,2 +1,3 @@
+v 1.0.2 => main: iconlar eniga max 12ta joylashadi.
 v 1.0.1 => main: Improving history added.
 v 1.0.0 => main: Added edit and remove options for links, improved link management, and enabled icon position editing.
