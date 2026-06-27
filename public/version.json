@@ -1,0 +1,43 @@
+[
+  {
+    "id": "v1",
+    "date": "2026-06-27T00:00:00Z",
+    "author": "user",
+    "changes": [
+      "Index.html converted to standard HTML structure (<!doctype html>, <html>, <body>)",
+      "Added three-dot menu with 'Edit Shortcut' and 'Remove Shortcut' actions to protect links from accidental removal",
+      "Made add modal reusable for editing links"
+    ],
+    "commit": "request Copilot 1: index.html ni shunday tahrirlansin-ki, Yangi qo'shilgan link osonlikcha remova qilinmasin: 3 nuqtali qismini bosganda \"Edit Shortcut\" vs \"Remove Shortcut\" shaklida bo'lsin. html ni standart shaklga keltir."
+  },
+  {
+    "id": "v2",
+    "date": "2026-06-27T00:05:00Z",
+    "author": "user",
+    "changes": [
+      "Prevent navigation when using Edit or Remove actions so page doesn't open",
+      "Removed delete confirmation so Remove Shortcut deletes immediately"
+    ],
+    "commit": "request Copilot 2: Edit yoki delete qiliganda shahifaga otib yubormasin va delete qilganda ham delete qilish so'ralmasdan o'chirilsin."
+  },
+  {
+    "id": "v3",
+    "date": "2026-06-27T00:15:00Z",
+    "author": "user",
+    "changes": [
+      "Enabled drag-and-drop reordering of icons on the page",
+      "Persisted order in localStorage and updated Firestore 'order' field when available"
+    ],
+    "commit": "request Copilot 3: Endi Sahifadagi iconkalarni positsiyasini edit qilish mumkin bo'lsin."
+  },
+  {
+    "id": "final",
+    "date": "2026-06-27T00:20:00Z",
+    "author": "user",
+    "changes": [
+      "Aggregated changes and prepared repository metadata",
+      "Added version.json and History view to the UI"
+    ],
+    "commit": "Added edit and remove options for links, improved link management, and enabled icon position editing."
+  }
+]
